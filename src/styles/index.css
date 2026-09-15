@@ -1,0 +1,546 @@
+:root {
+  color-scheme: light;
+  font-family: 'M PLUS Rounded 1c', system-ui, 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  --primary: #8b7ae0;
+  --primary-dark: #6f5ecf;
+  --pastel-pink: #ffd6e8;
+  --pastel-purple: #d6c7ff;
+  --pastel-mint: #c4f0e4;
+  --pastel-yellow: #ffe8b8;
+  --pastel-blue: #c7e5ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #fbf9ff;
+  color: #3a2e52;
+}
+
+a {
+  color: var(--primary-dark);
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 96px;
+}
+
+.page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.page__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+}
+
+input,
+select,
+textarea {
+  padding: 8px 10px;
+  border: 1px solid #ddd3f7;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+button {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--primary);
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--primary);
+  color: var(--primary-dark);
+  text-decoration: none;
+  background: #fff;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button--primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.field-error {
+  color: #dc2626;
+  font-size: 13px;
+  margin: 0;
+}
+
+.notice {
+  color: #7a6b99;
+  font-size: 13px;
+}
+
+/* ロゴ */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.logo__wordmark {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  background: linear-gradient(90deg, #ff9ec4, #8b7ae0, #4fd1b8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ランディング */
+.landing__hero {
+  text-align: center;
+  padding: 48px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.landing__cta {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.landing__testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.landing__testimonial-card {
+  margin: 0;
+  padding: 16px;
+  border-radius: 16px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.landing__testimonial-card p {
+  font-size: 13px;
+  margin: 0;
+}
+
+.landing__testimonial-card cite {
+  font-size: 11px;
+  color: #7a6b99;
+}
+
+.landing__download {
+  text-align: center;
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+/* パスワードルールチェックリスト */
+.password-rules {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.password-rules__item {
+  font-size: 12px;
+  color: #16a34a;
+}
+
+.password-rules__item::before {
+  content: '✓ ';
+}
+
+.password-rules__item--unmet {
+  color: #dc2626;
+}
+
+.password-rules__item--unmet::before {
+  content: '✗ ';
+}
+
+/* 認証済みレイアウト・下部タブ */
+.authed-layout {
+  min-height: 100vh;
+  padding-bottom: 64px;
+}
+
+.bottom-tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  display: flex;
+  background: #fff;
+  border-top: 1px solid #eee3ff;
+  z-index: 1000;
+}
+
+.bottom-tab-bar__tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: #b0a3d6;
+  text-decoration: none;
+  font-size: 11px;
+}
+
+.bottom-tab-bar__tab--active {
+  color: var(--primary-dark);
+}
+
+/* カフェ詳細 */
+.cafe-detail__badges {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cafe-detail__photos {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin: 12px 0;
+}
+
+.cafe-detail__photos img {
+  width: 200px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cafe-detail__menu-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+
+.cafe-detail__menu-items li {
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--pastel-yellow);
+  color: #7a5c1f;
+}
+
+.cafe-detail__reserve {
+  margin-top: 16px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #eee3ff;
+  border-radius: 12px;
+}
+
+.cafe-detail__mode-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.cafe-detail__share {
+  margin-top: 16px;
+}
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(58, 46, 82, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.dialog {
+  background: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.dialog__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.reservation-card {
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #eee3ff;
+  border-radius: 14px;
+  margin-bottom: 12px;
+}
+
+.reservation-card--active {
+  border-color: var(--primary);
+}
+
+.reservation-card__timer {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.shop-status-form {
+  margin: 16px 0;
+  flex-direction: row;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.reservation-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.reservation-table th,
+.reservation-table td {
+  border: 1px solid #eee3ff;
+  padding: 8px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.reservation-table button {
+  margin-right: 4px;
+  font-size: 13px;
+  padding: 4px 8px;
+}
+
+/* 地図(探す) */
+.search-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.search-page--list {
+  height: auto;
+  min-height: 100vh;
+  padding: 0 16px 96px;
+}
+
+.search-page__toolbar {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #fff;
+  border-bottom: 1px solid #eee3ff;
+}
+
+.search-page--list .search-page__toolbar {
+  padding: 10px 0;
+  border-bottom: none;
+}
+
+.search-page__toolbar input[type='search'] {
+  flex: 1;
+}
+
+.search-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 12px;
+  background: #fdfaff;
+  border-bottom: 1px solid #eee3ff;
+}
+
+.search-page--list .search-page__filters {
+  padding: 8px 0;
+  border-bottom: none;
+}
+
+.search-page__filters label {
+  font-size: 12px;
+}
+
+.search-page__filter-checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+.search-page__notice {
+  margin: 0;
+  padding: 6px 12px;
+}
+
+.search-page__map {
+  flex: 1;
+  width: 100%;
+}
+
+.nocrowd-marker {
+  background: transparent;
+  border: none;
+}
+
+.nocrowd-marker-label {
+  background: #fff;
+  border: 1px solid var(--pastel-purple);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.nocrowd-marker-label::before {
+  border-top-color: var(--pastel-purple) !important;
+}
+
+.search-page__popup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 180px;
+}
+
+.search-page__popup img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.search-page__popup h3 {
+  margin: 4px 0 0;
+  font-size: 15px;
+}
+
+/* 投稿・プロフィール */
+.onboarding-page__avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.onboarding-page__avatar-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.onboarding-page__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.profile-page__username {
+  color: #7a6b99;
+  font-weight: 600;
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.post-grid__item img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.post-grid__item p {
+  font-size: 11px;
+  margin: 2px 0;
+  color: #7a6b99;
+}
+
+.post-page__preview {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.post-page__rating {
+  display: flex;
+  gap: 4px;
+}
+
+.post-page__star {
+  background: none;
+  border: none;
+  color: #ddd3f7;
+  font-size: 26px;
+  padding: 0;
+  line-height: 1;
+}
+
+.post-page__star--filled {
+  color: #ffb84d;
+}

@@ -1,0 +1,134 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SmokingStatus {
+  NON_SMOKING
+  SMOKING
+  SEPARATED
+}
+
+enum CongestionLevel {
+  UNKNOWN
+  EMPTY
+  MODERATE
+  FULL
+}
+
+enum ReservationStatus {
+  ACTIVE
+  COMPLETED
+  CANCELLED
+  EXPIRED
+}
+
+enum ReservationType {
+  INSTANT
+  SCHEDULED
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+  UNSPECIFIED
+}
+
+enum SchoolType {
+  ELEMENTARY
+  JUNIOR_HIGH
+  HIGH_SCHOOL
+  UNIVERSITY
+  VOCATIONAL
+  OTHER
+}
+
+model User {
+  id           String        @id @default(cuid())
+  username     String        @unique
+  passwordHash String
+  phone        String?
+  email        String?
+  avatarUrl    String?
+  age          Int?
+  schoolType   SchoolType?
+  schoolName   String?
+  gender       Gender?
+  birthday     DateTime?
+  createdAt    DateTime      @default(now())
+  reservations Reservation[]
+  posts        Post[]
+}
+
+model Shop {
+  id                  String            @id @default(cuid())
+  name                String
+  address             String
+  lat                 Float
+  lng                 Float
+  isChain             Boolean           @default(false)
+  hasWifi             Boolean           @default(false)
+  hasPower            Boolean           @default(false)
+  smokingStatus       SmokingStatus     @default(NON_SMOKING)
+  photos              String[]          @default([])
+  menuPhotos          String[]          @default([])
+  menuItems           String[]          @default([])
+  description         String?
+  totalSeats          Int               @default(0)
+  availableSeats      Int               @default(0)
+  congestionLevel     CongestionLevel   @default(UNKNOWN)
+  congestionUpdatedAt DateTime?
+  createdAt           DateTime          @default(now())
+  staff               ShopStaff[]
+  reservations        Reservation[]
+  posts               Post[]
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  photoUrl  String
+  comment   String
+  rating    Int?
+  createdAt DateTime @default(now())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  shopId    String
+  shop      Shop     @relation(fields: [shopId], references: [id])
+
+  @@index([shopId])
+  @@index([userId])
+}
+
+model ShopStaff {
+  id           String @id @default(cuid())
+  username     String @unique
+  passwordHash String
+  shopId       String
+  shop         Shop   @relation(fields: [shopId], references: [id])
+}
+
+model Reservation {
+  id            String             @id @default(cuid())
+  code          String             @unique
+  type          ReservationType    @default(INSTANT)
+  status        ReservationStatus  @default(ACTIVE)
+  reservedAt    DateTime           @default(now())
+  expiresAt     DateTime?
+  cancelledAt   DateTime?
+  partySize     Int?
+  scheduledFor  DateTime?
+  contactPhone  String?
+  contactEmail  String?
+  userId        String
+  user          User               @relation(fields: [userId], references: [id])
+  shopId        String
+  shop          Shop               @relation(fields: [shopId], references: [id])
+
+  @@index([shopId, status])
+  @@index([userId, status])
+}

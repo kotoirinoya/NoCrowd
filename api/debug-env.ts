@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { prisma } from '../server/db'
 
 export default async function handler(_req: VercelRequest, res: VercelResponse) {
   try {
+    const { prisma } = await import('../server/db')
     const count = await prisma.shop.count()
     res.status(200).json({ ok: true, count })
   } catch (err) {

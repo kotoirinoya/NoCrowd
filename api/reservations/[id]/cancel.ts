@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { prisma } from '../../_lib/db'
-import { requireUser } from '../../_lib/auth'
-import { toReservationDTO } from '../../_lib/dto'
+import { prisma } from '../../_lib/db.js'
+import { requireUser } from '../../_lib/auth.js'
+import { toReservationDTO } from '../../_lib/dto.js'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {

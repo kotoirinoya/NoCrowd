@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { put } from '@vercel/blob'
-import { requireUser } from './_lib/auth'
+import { requireUser } from './_lib/auth.js'
 
 const MAX_UPLOAD_BYTES = 5 * 1024 * 1024
 const DATA_URL_PATTERN = /^data:(image\/[a-zA-Z+.-]+);base64,(.+)$/

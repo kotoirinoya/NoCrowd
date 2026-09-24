@@ -1,10 +1,10 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { prisma } from '../_lib/db'
-import { requireUser } from '../_lib/auth'
-import { expireStaleReservationsForShop } from '../_lib/expireReservations'
-import { generateReservationCode } from '../_lib/reservationCode'
-import { toReservationDTO } from '../_lib/dto'
-import { RESERVATION_HOLD_MINUTES } from '../../shared/types'
+import { prisma } from '../_lib/db.js'
+import { requireUser } from '../_lib/auth.js'
+import { expireStaleReservationsForShop } from '../_lib/expireReservations.js'
+import { generateReservationCode } from '../_lib/reservationCode.js'
+import { toReservationDTO } from '../_lib/dto.js'
+import { RESERVATION_HOLD_MINUTES } from '../../shared/types.js'
 
 async function handleGet(req: VercelRequest, res: VercelResponse) {
   const userId = requireUser(req, res)

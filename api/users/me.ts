@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import type { Gender, SchoolType } from '@prisma/client'
-import { prisma } from '../_lib/db'
-import { requireUser } from '../_lib/auth'
-import { toUserDTO } from '../_lib/dto'
+import { prisma } from '../_lib/db.js'
+import { requireUser } from '../_lib/auth.js'
+import { toUserDTO } from '../_lib/dto.js'
 
 const GENDERS = new Set<Gender>(['MALE', 'FEMALE', 'OTHER', 'UNSPECIFIED'])
 const SCHOOL_TYPES = new Set<SchoolType>([

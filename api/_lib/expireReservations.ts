@@ -1,4 +1,4 @@
-import { prisma } from './db'
+import { prisma } from './db.js'
 
 // 期限切れになった有効予約をEXPIREDにし、店舗の空席数を戻す。
 // バックグラウンドジョブを使わず、読み取り/予約作成のたびに遅延実行する。

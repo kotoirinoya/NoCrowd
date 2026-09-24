@@ -1,4 +1,4 @@
-import { NG_WORDS } from './ngWords'
+import { NG_WORDS } from './ngWords.js'
 
 export const USERNAME_MAX_LENGTH = 15
 export const PASSWORD_MIN_LENGTH = 10

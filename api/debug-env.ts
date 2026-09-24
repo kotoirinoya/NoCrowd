@@ -1,25 +1,31 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { readdirSync, readFileSync } from 'node:fs'
+import { PrismaClient } from '@prisma/client'
 
-function listDir(path: string): string[] | string {
-  try {
-    return readdirSync(path)
-  } catch (err) {
-    return String(err)
+const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient }
+
+function getClient(): PrismaClient {
+  if (!globalForPrisma.prisma) {
+    globalForPrisma.prisma = new PrismaClient()
   }
+  return globalForPrisma.prisma
 }
 
+const prisma = new Proxy({} as PrismaClient, {
+  get(_target, prop, receiver) {
+    const client = getClient()
+    const value = Reflect.get(client as object, prop, receiver)
+    return typeof value === 'function' ? value.bind(client) : value
+  },
+})
+
 export default async function handler(_req: VercelRequest, res: VercelResponse) {
-  let bundleHead = ''
   try {
-    bundleHead = readFileSync('/var/task/api/debug-env.js', 'utf-8').slice(0, 1500)
+    const count = await prisma.shop.count()
+    res.status(200).json({ ok: true, count })
   } catch (err) {
-    bundleHead = String(err)
+    res.status(500).json({
+      debug: String(err),
+      stack: err instanceof Error ? err.stack?.slice(0, 2000) : undefined,
+    })
   }
-  res.status(200).json({
-    task: listDir('/var/task'),
-    taskApi: listDir('/var/task/api'),
-    taskApiLib: listDir('/var/task/api/_lib'),
-    bundleHead,
-  })
 }

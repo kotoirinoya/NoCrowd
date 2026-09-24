@@ -31,3 +31,29 @@ NoCrowdは、この「カフェ難民」状態をなくすために作りまし�
 - テスト期間、家では集中できず外で勉強したい大学生
 - カフェを探す・移動する時間がもったいないと感じている人
 - 毎回同じチェーン店に行かず、自分に合う勉強カフェを見つけたい人
+
+## 構成図(開発者向け)
+
+```mermaid
+graph LR
+    USER[ユーザーのブラウザ]
+    VITE["画面<br/>(Vite + React)"]
+    API["api/<br/>(Vercel Functions)"]
+    DB[("Postgres<br/>(Neon)")]
+    OSM["外部サービス<br/>地図タイル (OpenStreetMap)"]
+    BLOB["外部サービス<br/>画像保存 (Vercel Blob)"]
+
+    USER -->|操作・入力| VITE
+    VITE -->|画面表示| USER
+    VITE -->|リクエスト(JSON)| API
+    API -->|レスポンス(JSON)| VITE
+    API -->|接続・クエリ| DB
+    DB -->|結果(JSON化前データ)| API
+    VITE -->|タイル取得| OSM
+    API -->|画像アップロード| BLOB
+    BLOB -->|画像URL| API
+```
+
+- ブラウザは Postgres に直接接続せず、必ず `api/`(Vercel Functions)を経由する
+- 地図タイル(OpenStreetMap)のみ、APIキー不要のためブラウザから直接取得している
+- 画像アップロードは `api/uploads.ts` が受け取り、Vercel Blob に保存してURLだけをブラウザに返す

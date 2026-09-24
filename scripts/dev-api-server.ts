@@ -34,10 +34,8 @@ function toSegments(pattern: string): string[] {
 }
 
 const ROUTES: Route[] = [
-  { method: 'POST', segments: toSegments('/api/auth/signup'), file: 'auth/signup.ts' },
-  { method: 'POST', segments: toSegments('/api/auth/login'), file: 'auth/login.ts' },
-  { method: 'POST', segments: toSegments('/api/auth/logout'), file: 'auth/logout.ts' },
-  { method: 'GET', segments: toSegments('/api/auth/me'), file: 'auth/me.ts' },
+  { method: 'POST', segments: toSegments('/api/auth/:action'), file: 'auth/[action].ts' },
+  { method: 'GET', segments: toSegments('/api/auth/:action'), file: 'auth/[action].ts' },
   { method: 'GET', segments: toSegments('/api/users/me'), file: 'users/me.ts' },
   { method: 'PATCH', segments: toSegments('/api/users/me'), file: 'users/me.ts' },
   { method: 'POST', segments: toSegments('/api/uploads'), file: 'uploads.ts' },
@@ -48,8 +46,7 @@ const ROUTES: Route[] = [
   { method: 'GET', segments: toSegments('/api/reservations'), file: 'reservations/index.ts' },
   { method: 'POST', segments: toSegments('/api/reservations'), file: 'reservations/index.ts' },
   { method: 'POST', segments: toSegments('/api/reservations/:id/cancel'), file: 'reservations/[id]/cancel.ts' },
-  { method: 'POST', segments: toSegments('/api/shop-auth/login'), file: 'shop-auth/login.ts' },
-  { method: 'POST', segments: toSegments('/api/shop-auth/logout'), file: 'shop-auth/logout.ts' },
+  { method: 'POST', segments: toSegments('/api/shop-auth/:action'), file: 'shop-auth/[action].ts' },
   { method: 'GET', segments: toSegments('/api/shop/status'), file: 'shop/status.ts' },
   { method: 'POST', segments: toSegments('/api/shop/status'), file: 'shop/status.ts' },
   { method: 'POST', segments: toSegments('/api/shop/reservations/:id'), file: 'shop/reservations/[id].ts' },

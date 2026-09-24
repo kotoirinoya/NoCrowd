@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { prisma } from '../_lib/db'
-import { requireUser } from '../_lib/auth'
+import { prisma } from '../../server/db'
+import { requireUser } from '../../server/auth'
 import type { PostDTO } from '../../shared/types'
 
 function toPostDTO(post: {

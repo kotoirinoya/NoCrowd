@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { prisma } from '../_lib/db'
-import { verifyPassword, issueShopToken, clearAuthCookie, SHOP_COOKIE } from '../_lib/auth'
+import { prisma } from '../../server/db'
+import { verifyPassword, issueShopToken, clearAuthCookie, SHOP_COOKIE } from '../../server/auth'
 
 async function login(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {

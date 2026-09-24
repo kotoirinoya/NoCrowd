@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { prisma } from '../_lib/db'
-import { expireStaleReservationsForAllShops } from '../_lib/expireReservations'
-import { toShopDTO } from '../_lib/dto'
-import { getRatingStatsForShops } from '../_lib/ratings'
+import { prisma } from '../../server/db'
+import { expireStaleReservationsForAllShops } from '../../server/expireReservations'
+import { toShopDTO } from '../../server/dto'
+import { getRatingStatsForShops } from '../../server/ratings'
 
 function parseCoord(value: unknown): number | null {
   if (typeof value !== 'string') return null

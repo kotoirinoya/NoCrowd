@@ -1,6 +1,6 @@
 import type { Shop, Reservation, User } from '@prisma/client'
-import { haversineDistanceKm } from '../../shared/distance'
-import type { ShopDTO, ReservationDTO, ShopReservationDTO, UserDTO } from '../../shared/types'
+import { haversineDistanceKm } from '../shared/distance'
+import type { ShopDTO, ReservationDTO, ShopReservationDTO, UserDTO } from '../shared/types'
 
 export function toUserDTO(user: User): UserDTO {
   return {

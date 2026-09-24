@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { prisma } from '../_lib/db'
-import { verifyPassword, hashPassword, issueUserToken, clearAuthCookie, USER_COOKIE, requireUser } from '../_lib/auth'
-import { toUserDTO } from '../_lib/dto'
+import { prisma } from '../../server/db'
+import { verifyPassword, hashPassword, issueUserToken, clearAuthCookie, USER_COOKIE, requireUser } from '../../server/auth'
+import { toUserDTO } from '../../server/dto'
 import { validateUsername, validatePassword } from '../../shared/validation'
 
 async function signup(req: VercelRequest, res: VercelResponse) {

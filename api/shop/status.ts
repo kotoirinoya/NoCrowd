@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import type { CongestionLevel } from '@prisma/client'
-import { prisma } from '../_lib/db'
-import { requireShop } from '../_lib/auth'
-import { expireStaleReservationsForShop } from '../_lib/expireReservations'
-import { toShopDTO, toShopReservationDTO } from '../_lib/dto'
+import { prisma } from '../../server/db'
+import { requireShop } from '../../server/auth'
+import { expireStaleReservationsForShop } from '../../server/expireReservations'
+import { toShopDTO, toShopReservationDTO } from '../../server/dto'
 
 const CONGESTION_LEVELS = new Set<CongestionLevel>(['UNKNOWN', 'EMPTY', 'MODERATE', 'FULL'])
 

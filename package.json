@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:api": "tsx scripts/dev-api-server.ts",
-    "build": "vite build",
+    "build": "prisma generate && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "prisma:generate": "prisma generate",

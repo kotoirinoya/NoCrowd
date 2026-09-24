@@ -16,19 +16,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return
   }
 
-  await expireStaleReservationsForAllShops()
+  try {
+    await expireStaleReservationsForAllShops()
 
-  const lat = parseCoord(req.query.lat)
-  const lng = parseCoord(req.query.lng)
-  const coords = lat !== null && lng !== null ? { lat, lng } : null
+    const lat = parseCoord(req.query.lat)
+    const lng = parseCoord(req.query.lng)
+    const coords = lat !== null && lng !== null ? { lat, lng } : null
 
-  const shops = await prisma.shop.findMany({ orderBy: { name: 'asc' } })
-  const ratingStats = await getRatingStatsForShops(shops.map((s) => s.id))
-  const dtos = shops.map((shop) => toShopDTO(shop, coords, ratingStats.get(shop.id)))
+    const shops = await prisma.shop.findMany({ orderBy: { name: 'asc' } })
+    const ratingStats = await getRatingStatsForShops(shops.map((s) => s.id))
+    const dtos = shops.map((shop) => toShopDTO(shop, coords, ratingStats.get(shop.id)))
 
-  if (coords) {
-    dtos.sort((a, b) => (a.distanceKm ?? Infinity) - (b.distanceKm ?? Infinity))
+    if (coords) {
+      dtos.sort((a, b) => (a.distanceKm ?? Infinity) - (b.distanceKm ?? Infinity))
+    }
+
+    res.status(200).json(dtos)
+  } catch (err) {
+    // TEMP DEBUG: remove once the 500 cause is identified
+    res.status(500).json({ debug: String(err), stack: err instanceof Error ? err.stack : undefined })
   }
-
-  res.status(200).json(dtos)
 }
